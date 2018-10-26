@@ -24,7 +24,7 @@ class Task():
         self.action_size = 4
 
         # Goal
-        self.target_pos = target_pos if target_pos is not None else np.array([0., 0., 10.]) 
+        self.target_pos = target_pos if target_pos is not None else np.array([10., 20., 0]) 
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
