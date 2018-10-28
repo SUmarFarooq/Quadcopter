@@ -30,7 +30,7 @@ class Task():
         """Uses current pose of sim to return reward."""
         distance = abs(self.sim.pose[:3] - self.target_pos).sum()
         if distance > 20: 
-            reward = 0
+            reward = 10/distance
         elif distance <= 20 and distance > 10:
             reward = 20/distance
         elif distance <= 10 and distance >= 1:
