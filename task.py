@@ -28,7 +28,19 @@ class Task():
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
-        reward = 1.-.3*(abs(self.sim.pose[:3] - self.target_pos)).sum()
+        distance = abs(self.sim.pose[:3] - self.target_pos).sum()
+        if distance > 20: 
+            reward = 0
+        elif distance <= 20 and distance > 10:
+            reward = 20/distance
+        elif distance <= 10 and distance >= 1:
+            reward = 50/distance
+        else:
+            reward = 200/distance
+#         reward = (2** (1/(abs(self.sim.pose[:3] - self.target_pos)).sum()))
+#         print('selfpose', self.sim.pose[:3], 'target pos', self.target_pos)
+#         print('reward', reward)
+#         print('absolute val of subracted array', abs(self.sim.pose[:3] - self.target_pos).sum())
         return reward
 
     def step(self, rotor_speeds):
