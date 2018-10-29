@@ -24,19 +24,20 @@ class Task():
         self.action_size = 4
 
         # Goal
-        self.target_pos = target_pos if target_pos is not None else np.array([10., 20., 0]) 
+        self.target_pos = target_pos if target_pos is not None else np.array([10., 10., 0]) 
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
         distance = abs(self.sim.pose[:3] - self.target_pos).sum()
-        if distance > 20: 
-            reward = 10/distance
-        elif distance <= 20 and distance > 10:
-            reward = 20/distance
-        elif distance <= 10 and distance >= 1:
-            reward = 50/distance
-        else:
-            reward = 200/distance
+#         if distance > 20: 
+#             reward = -1/distance
+#         elif distance <= 20 and distance > 10:
+#             reward = 20/distance
+#         elif distance <= 10 and distance >= 1:
+#             reward = 50/distance
+#         else:
+#             reward = 200/distance
+        reward = np.tanh(1 - 0.003*distance)
 #         reward = (2** (1/(abs(self.sim.pose[:3] - self.target_pos)).sum()))
 #         print('selfpose', self.sim.pose[:3], 'target pos', self.target_pos)
 #         print('reward', reward)
